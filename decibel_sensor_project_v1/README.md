@@ -2,7 +2,7 @@
 
 This is the first version of my Arduino sound level meter. It reads noise from an analog sound sensor, estimates the decibel level, shows it on a 16x2 LCD, and turns on colored LEDs depending on how loud the environment is. It's simple but it works — and building it taught me more about electronics than I expected.
 
-![v1 photo](meter2.jpeg)
+![v1 photo](../meter2.jpeg)
 
 > ▶ [Demo video](https://youtube.com/shorts/85OEcRe_1FY?si=_X9sWY59fgYg-t49)
 

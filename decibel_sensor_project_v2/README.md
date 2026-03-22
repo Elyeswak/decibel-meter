@@ -2,7 +2,7 @@
 
 This is the upgraded version of my sound level meter. After using v1 for a while, three things bothered me: the dB readings felt compressed and inaccurate, the number flickered constantly, and just staring at a number isn't great for quick visual feedback. So I rewrote the core logic with the **actual logarithmic decibel formula**, added a **smooth bar graph** on the LCD bottom row using custom characters, and threw in a **moving average filter** to kill the flicker. Same hardware, much better result.
 
-![v2 photo](meter2.jpeg)
+![v2 photo](../meter2.jpeg)
 
 > ▶ [Demo video](https://youtube.com/shorts/uJp66_pOYUA?si=NUtQGholeqavDKd9)
 
