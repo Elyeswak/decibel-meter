@@ -1,3 +1,4 @@
+
 #include <LiquidCrystal.h>
 
 LiquidCrystal lcd(    7,  8,  9, 10, 11, 12);
@@ -10,15 +11,17 @@ LiquidCrystal lcd(    7,  8,  9, 10, 11, 12);
 const int sampleWindow = 50;
 unsigned int sample;
 
-const float ADC_REF = 20.0;  )
+const float ADC_REF = 20.0; 
 const float DB_MIN  = 40.0;  
-const float DB_MAX  = 95.0;   
+const float DB_MAX  = 95.0;
+
+
 
 byte bar1[8] = {0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10};
-byte bar2[8] = {0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18};
-byte bar3[8] = {0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C};
-byte bar4[8] = {0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E};
-byte bar5[8] = {0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F};
+byte bar2[8] = {0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18}; 
+byte bar3[8] = {0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C}; 
+byte bar4[8] = {0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E}; 
+byte bar5[8] = {0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F};  
 
 const int SMOOTH_COUNT = 3;
 float dbHistory[3] = {40.0, 40.0, 40.0};
@@ -52,8 +55,8 @@ void setup() {
   lcd.clear();
 }
 
-// ==================== MAIN LOOP ====================
 void loop() {
+
   unsigned long startMillis = millis();
   unsigned int signalMax = 0;
   unsigned int signalMin = 1024;
@@ -66,19 +69,21 @@ void loop() {
     }
   }
 
-
   float peakToPeak = signalMax - signalMin;
 
   float db;
   if (peakToPeak <= ADC_REF) {
-    db = DB_MIN;
+    db = DB_MIN; 
   } else {
+
     db = DB_MIN + 20.0 * log10(peakToPeak / ADC_REF);
   }
+
 
   if (db < DB_MIN) db = DB_MIN;
   if (db > DB_MAX) db = DB_MAX;
 
+  
   dbHistory[historyIndex] = db;
   historyIndex = (historyIndex + 1) % SMOOTH_COUNT;
 
@@ -90,6 +95,7 @@ void loop() {
 
   int dbDisplay = (int)dbSmoothed;
 
+ 
   lcd.setCursor(0, 0);
 
   if (dbDisplay <= 60) {
@@ -105,6 +111,7 @@ void loop() {
   else if (dbDisplay < 100) lcd.print(" ");
   lcd.print(dbDisplay);
   lcd.print(" dB");
+
 
   drawBar(dbSmoothed);
 
@@ -134,12 +141,14 @@ void loop() {
   delay(100);
 }
 
+
 void drawBar(float db) {
+
   int barLength = map((int)db, (int)DB_MIN, (int)DB_MAX, 0, 80);
   barLength = constrain(barLength, 0, 80);
 
-  int fullBlocks = barLength / 5;  
-  int remainder  = barLength % 5; 
+  int fullBlocks = barLength / 5; 
+  int remainder  = barLength % 5;
 
   lcd.setCursor(0, 1);
 
